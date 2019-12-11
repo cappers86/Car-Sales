@@ -1,11 +1,14 @@
 import React from 'react';
-
+import {makeHappy, makeUnhappy} from './index';
+import {connect} from 'react-redux';
+import happy from './components/images/happy.webp';
+import unHappy from './components/images/unhappy.jpg';
 import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
-
-const App = () => {
+import './styles.scss';
+const App = ({amIHappy, makeHappy, makeUnhappy}) => {
   const state = {
     additionalPrice: 0,
     car: {
@@ -34,15 +37,26 @@ const App = () => {
   return (
     <div className="boxes">
       <div className="box">
-        <Header car={state.car} />
+        {/* <Header car={state.car} />
         <AddedFeatures car={state.car} />
       </div>
       <div className="box">
         <AdditionalFeatures additionalFeatures={state.additionalFeatures} />
-        <Total car={state.car} additionalPrice={state.additionalPrice} />
+        <Total car={state.car} additionalPrice={state.additionalPrice} /> */}
+        
+        <p className="text">
+          {
+            amIHappy ? <img src={happy} alt="" /> : <img src={unHappy} alt="" />
+          }
+        </p>
+        <button className="buttom" onClick={makeHappy}>happy</button>
+        <button className="buttom" onClick={makeUnhappy}><p className="text">unhappy</p></button>
       </div>
     </div>
   );
 };
 
-export default App;
+export default connect(
+  state => state,
+  {makeHappy, makeUnhappy},
+)(App);
