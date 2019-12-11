@@ -1,11 +1,13 @@
 import React from 'react';
 import {makeHappy, makeUnhappy} from './index';
 import {connect} from 'react-redux';
+import happy from './components/images/happy.webp';
+import unHappy from './components/images/unhappy.jpg';
 import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
-
+import './styles.scss';
 const App = ({amIHappy, makeHappy, makeUnhappy}) => {
   const state = {
     additionalPrice: 0,
@@ -42,13 +44,13 @@ const App = ({amIHappy, makeHappy, makeUnhappy}) => {
         <AdditionalFeatures additionalFeatures={state.additionalFeatures} />
         <Total car={state.car} additionalPrice={state.additionalPrice} /> */}
         
-        <p>
+        <p className="text">
           {
-            amIHappy ? ':)' : ':('
+            amIHappy ? <img src={happy} alt="" /> : <img src={unHappy} alt="" />
           }
         </p>
-        <button onClick={makeHappy}>happy</button>
-        <button onClick={makeUnhappy}>unhappy</button>
+        <button className="buttom" onClick={makeHappy}>happy</button>
+        <button className="buttom" onClick={makeUnhappy}><p className="text">unhappy</p></button>
       </div>
     </div>
   );
